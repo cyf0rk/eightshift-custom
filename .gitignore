@@ -1,0 +1,44 @@
+# Wordpress files
+wp-admin
+wp-includes
+/license.txt
+/readme.html
+/wp-activate.php
+/index.php
+/wp-blog-header.php
+/wp-comments-post.php
+/wp-config-sample.php
+/wp-config.php
+/wp-cron.php
+/wp-links-opml.php
+/wp-load.php
+/wp-login.php
+/wp-mail.php
+/wp-settings.php
+/wp-signup.php
+/wp-trackback.php
+/xmlrpc.php
+
+# Content
+wp-content/*
+wp-content/themes/index.php
+!wp-content/themes/
+
+# Ignore specific themes
+wp-content/themes/twenty*/
+
+# Mac OS custom attribute store and thumbnails
+*.DS_Store
+._*
+.env
+env.json
+
+# Error logs
+error_log.txt
+wordfence-waf.php
+wflogs
+
+# Databases and exports
+latest_dump.tar.gz
+latest_dump
+.editorconfig
