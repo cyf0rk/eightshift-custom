@@ -52,6 +52,21 @@ class Blocks extends AbstractBlocks
 		\add_action('wp_footer', [$this, 'outputCssVariablesInline']);
 
     // Disable core blocks
-    \add_filter('allowed_block_types_all', [$this, 'getAllBlocksList'], 10, 2);
+    \add_filter('allowed_block_types_all', [$this, 'allowedBlocks'], 10, 2);
 	}
+
+  /**
+  * Filter which blocks are displayed in the block editor.
+  *
+  * @param array|bool $allowedBlockTypes Array of block type slugs, or boolean to enable/disable all.
+  * @param object     $post The post resource data.
+  *
+  * @return array
+  */
+  public function allowedBlocks($allowedBlockTypes, object $post): array
+  {
+    return array_merge(
+      $this->getAllBlocksList([], $post)
+    );
+  }
 }
