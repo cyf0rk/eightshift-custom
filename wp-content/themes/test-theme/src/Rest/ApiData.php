@@ -41,9 +41,11 @@ class ApiData
   /**
    * Get data from an api
    * 
-   * @return object json object
+	 * @param array query parameters
+   * 
+   * @return array api data
    */
-  public function getApiData(array $queryParams)
+  public function getApiData(array $queryParams): array
   {
     $apiUrl = $this->apiUrl;
     $apiKey = $this->apiKey;

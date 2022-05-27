@@ -98,6 +98,13 @@ class TestRouteRoute extends AbstractRoute implements CallableRouteInterface
 		return $response;
 	}
 
+	/**
+	 * Method that returns sanitized request parameters
+	 *
+	 * @param array request parameters
+	 *
+	 * @return array sanitized parameters
+	 */
 	private function sanitizeRequestParameters(array $requestParams): array
 	{
 		$sanitizedRequestParams = [];
