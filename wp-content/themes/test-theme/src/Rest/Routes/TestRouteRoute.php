@@ -92,8 +92,21 @@ class TestRouteRoute extends AbstractRoute implements CallableRouteInterface
 	 */
 	public function routeCallback(WP_REST_Request $request)
 	{
-		$response = \json_decode($request->get_body(), true);
+		$requestParams = $this->sanitizeRequestParameters($request->get_params());
+		$response = $this->apiData->getApiData($requestParams);
 
-		return \rest_ensure_response($response);
+		return $response;
+	}
+
+	private function sanitizeRequestParameters(array $requestParams): array
+	{
+		$sanitizedRequestParams = [];
+
+		foreach ($requestParams as $key => $value)
+		{
+			$sanitizedRequestParams[$key] = stripslashes(sanitize_text_field($value));
+		}
+
+		return $sanitizedRequestParams; 
 	}
 }

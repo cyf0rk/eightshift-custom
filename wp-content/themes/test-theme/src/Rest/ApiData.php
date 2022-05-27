@@ -43,20 +43,23 @@ class ApiData
    * 
    * @return object json object
    */
-  public function getApiData(array $queryParams): object
+  public function getApiData(array $queryParams)
   {
     $apiUrl = $this->apiUrl;
     $apiKey = $this->apiKey;
 
     if (!empty($queryParams)) {
-      $apiUrl = add_query_arg($queryParams, $apiUrl);
+      $apiUrl = esc_url(add_query_arg($queryParams, $apiUrl));
     }
 
-    $response = wp_remote_get($apiUrl, array(
+    $requestArgs = array(
       'headers' => array(
-        'Authorization' => $apiKey
+        'Accept' => 'application/json',
+        'Authorization' => $apiKey,
       )
-    ));
+    );
+
+    $response = wp_remote_get($apiUrl, $requestArgs);
 
     return $response;
   }
