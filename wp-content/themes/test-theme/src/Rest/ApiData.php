@@ -43,7 +43,7 @@ class ApiData implements ApiDataInterface
    *
 	 * @param array query parameters
    *
-   * @return array api data
+   * @return array api response data
    */
   public function getApiData(array $queryParams): array
   {
@@ -71,11 +71,11 @@ class ApiData implements ApiDataInterface
   }
 
   /**
-   * Get data from an api
+   * Sanitize api response data
    *
-	 * @param array query parameters
+	 * @param array api response data
    *
-   * @return array api data
+   * @return array sanitized api response data
    */
   private function sanitizeResponse(array $response): array
   {
