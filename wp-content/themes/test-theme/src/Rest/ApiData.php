@@ -83,7 +83,7 @@ class ApiData implements ApiDataInterface
       if (is_string($value)) {
         $response[$key] = wp_strip_all_tags($value);
       } elseif (is_array($value)) {
-        $response[$key] = $this->sanitizeResponse($value);
+        $this->sanitizeResponse($value);
       }
     }
 
