@@ -22,20 +22,22 @@ class ApiData implements ApiDataInterface
    */
   private $apiUrl;
 
-  /**
-   * API key constant
-   *
-   * @var string
-   */
-  private $apiKey;
-
 	/**
 	 * Create a new ApiData instance.
 	 */
   public function __construct()
   {
     $this->apiUrl = API_URL;
-    $this->apiKey = API_KEY;
+  }
+
+	/**
+	 * Register all hooks
+   * 
+   * @return void
+	 */
+  public function register(): void
+  {
+    \add_action('get_api_data', [$this, 'getApiData']);
   }
 
   /**
@@ -48,23 +50,15 @@ class ApiData implements ApiDataInterface
   public function getApiData(array $queryParams): array
   {
     $apiUrl = $this->apiUrl;
-    $apiKey = $this->apiKey;
     $numOfArticles = $queryParams['pageSize'] ?? 4;
 
     if (!empty($queryParams)) {
       $apiUrl = esc_url(add_query_arg($queryParams, $apiUrl));
     }
 
-    $requestArgs = array(
-      'headers' => array(
-        'Accept' => 'application/json',
-        'Authorization' => $apiKey,
-      )
-    );
-
-    $response = wp_remote_get($apiUrl, $requestArgs);
+    $response = wp_remote_get($apiUrl);
     $response = json_decode(wp_remote_retrieve_body($response));
-    $response = $this->sanitizeResponse($response->articles);
+    $response = $this->sanitizeResponse($response->data);
     $response = array_slice($response, 0, $numOfArticles);
 
     return $response;
